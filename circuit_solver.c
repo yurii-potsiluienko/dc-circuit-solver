@@ -149,6 +149,22 @@ void solve_circuit(circuit c, double * voltages, double *currents) {
     for (int k = 0; k < c.num_voltage_sources; k++) {
         b[num_voltage_nodes + k] = c.voltage_sources[k].voltage;
     }
+    // Fill the current source contributions to vector b
+    for (int i = 0; i < c.num_current_sources; i++) {
+        int n1 = c.current_sources[i].node_pos;
+        int n2 = c.current_sources[i].node_neg;
+        double I = c.current_sources[i].current;
+
+        if (n1 != 0) {
+            int i1 = n1 - 1;
+            b[i1] -= I;   // current leaving node_pos
+        }
+
+        if (n2 != 0) {
+            int i2 = n2 - 1;
+            b[i2] += I;   // current entering node_neg
+        }
+    }
     // Solve the system Ax = b
     double *x = malloc(n * sizeof(double));
     assert(x != NULL);
@@ -232,7 +248,7 @@ void print_circuit(circuit c) {
                 c.current_sources[i].current
             );
         }
-        printf( "+------------+----------+----------+------------+\n\n");
+        printf( " +------------+----------+----------+------------+\n\n");
     }
 
     printf(" =================================================\n");
