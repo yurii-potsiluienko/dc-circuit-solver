@@ -30,6 +30,10 @@ The goal of this project was to combine concepts from programming, circuit analy
 
 ![Circuit Solution](images/circuit_solution.png)
 
+### Circuit Solution Using KiCad
+
+![Circuit Solution KiCad](images/circuit_solution_kicad.png)
+
 ## Possible Future Improvements
 
 - Support for additional components (capacitors, inductors)
