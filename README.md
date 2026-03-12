@@ -1,4 +1,4 @@
-# DC Circuit Solver in C
+# DC circuit solver
 
 ## Overview
 
